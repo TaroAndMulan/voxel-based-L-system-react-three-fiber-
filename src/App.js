@@ -4,7 +4,7 @@ import "./App.css";
 import { OrbitControls, Environment } from "@react-three/drei";
 import Lindenmayer from "./component/lindenmayer";
 import RowRadioButtonsGroup from "./component/selector";
-import { TextField, Button, Grid } from "@mui/material";
+import { TextField, Button, Grid, Typography } from "@mui/material";
 import DiscreteSliderMarks from "./component/iterationslider";
 import ArrowCircleRightTwoToneIcon from "@mui/icons-material/ArrowCircleRightTwoTone";
 import { GridHelper, Vector3 } from "three";
@@ -102,7 +102,10 @@ function App() {
     <>
       <Grid container spacing={2}>
         <Grid item xs={3}>
-          <div>
+          <div style={{marginTop:"50px",borderStyle:"solid",backgroundColor:"FloralWhite",padding:"15px"}}>
+          <Typography align="center"  variant="h6"  gutterBottom>
+          PRESET
+        </Typography>
             <RowRadioButtonsGroup
               autoComplete="off"
               onChange={handleChange}
@@ -110,13 +113,27 @@ function App() {
             />
           </div>
 
-          <form onSubmit={handleSubmit}>
+          <div style={{marginTop:"50px",borderStyle:"solid",padding:"15px",backgroundColor:"FloralWhite"}}>
+          <Typography align="center" variant="h6" gutterBottom>
+          ITERATION
+        </Typography> <DiscreteSliderMarks  handleSlider={handleSlider} />
+          </div>
+
+          <form  style={{marginTop:"50px",borderStyle:"solid",padding:"15px",backgroundColor:"FloralWhite"}} onSubmit={handleSubmit}>
+
+          <Typography align="center" variant="h6"  gutterBottom>
+          CUSTOM RULES
+        </Typography> 
             <TextField
               id="outlined-basic"
               label="axiom"
               onChange={setaxiom}
               size="small"
+              autoComplete="off"
+              style={{marginTop:"10px"}}
             />
+            <Button type="submit" variant="contained" style={{marginLeft:"10px",marginTop:"10px"}}>Generate</Button>
+
             <div style={ruleStyle}>
               <TextField
                 id="outlined-basic"
@@ -176,12 +193,13 @@ function App() {
                 size="small"
               />
             </div>
-            <Button type="submit">Generate</Button>
           </form>
-
           <div>
-            #Iteration <DiscreteSliderMarks handleSlider={handleSlider} />
+          <textarea style={{marginTop:"50px",borderStyle:"solid",padding:"15px",backgroundColor:"FloralWhite", fontSize:"20px"}}/>
           </div>
+
+
+
         </Grid>
         <Grid item xs={9}>
           <div className="threejs">

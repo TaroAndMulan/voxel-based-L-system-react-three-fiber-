@@ -9,7 +9,6 @@ import FormLabel from '@mui/material/FormLabel';
 const RowRadioButtonsGroup = ({onChange,preset})=>{
     return (
         <FormControl>
-          <FormLabel id="demo-row-radio-buttons-group-label">Preset Setting</FormLabel>
           <RadioGroup
             row
             aria-labelledby="demo-row-radio-buttons-group-label"
