@@ -172,8 +172,6 @@ function Lsystem_custom(custom,iteration){
     console.log(custom);
     const rules= custom.rules;
     const axiom= custom.axiom;
-    //console.log("custom rule",rules);
-    //console.log("custom ax",axiom);
 
 
     var path = axiom;

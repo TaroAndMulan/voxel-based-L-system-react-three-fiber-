@@ -1,17 +1,14 @@
 import React, { useRef, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import "./App.css";
-import {
-  OrbitControls,
-  Environment,
-} from "@react-three/drei";
+import { OrbitControls, Environment } from "@react-three/drei";
 import Lindenmayer from "./component/lindenmayer";
 import RowRadioButtonsGroup from "./component/selector";
 import { TextField, Button, Grid } from "@mui/material";
 import DiscreteSliderMarks from "./component/iterationslider";
-import ArrowCircleRightTwoToneIcon from '@mui/icons-material/ArrowCircleRightTwoTone';
+import ArrowCircleRightTwoToneIcon from "@mui/icons-material/ArrowCircleRightTwoTone";
 
-var axiom ="";
+var axiom = "";
 var rule1 = "";
 var rule1_r = "";
 
@@ -44,10 +41,9 @@ function App() {
 
   function handleSubmit_2() {
     let s = { rules: "", axiom: "" };
-    if (rule1.lenght===0 && rule2.length===0 && rule3.lenght===0){
-      s = {}
-    }
-    else if (rule3.length === 0 && rule2.length === 0) {
+    if (rule1.lenght === 0 && rule2.length === 0 && rule3.lenght === 0) {
+      s = {};
+    } else if (rule3.length === 0 && rule2.length === 0) {
       s.rules = JSON.parse(`{"${rule1}":"${rule1_r}"}`);
     } else if (rule3.length === 0) {
       s.rules = JSON.parse(`{"${rule1}":"${rule1_r}","${rule2}":"${rule2_r}"}`);
@@ -91,53 +87,86 @@ function App() {
     handleSubmit_2();
   }
 
-  const ruleStyle={
-    marginTop:'10px'
-  }
+  const ruleStyle = {
+    marginTop: "10px",
+  };
 
   return (
     <>
       <Grid container spacing={2}>
         <Grid item xs={3}>
           <div>
-            <RowRadioButtonsGroup autoComplete='off' onChange={handleChange} preset={preset} />
+            <RowRadioButtonsGroup
+              autoComplete="off"
+              onChange={handleChange}
+              preset={preset}
+            />
           </div>
 
           <form onSubmit={handleSubmit}>
-            <TextField id="outlined-basic" label="axiom"  onChange={setaxiom} size="small" />
+            <TextField
+              id="outlined-basic"
+              label="axiom"
+              onChange={setaxiom}
+              size="small"
+            />
             <div></div>
             <div style={ruleStyle}>
-              <TextField id="outlined-basic" label="rule1" style={{width:'20%'} } autoComplete='off'
- onChange={setrule1} size="small" />
-              <ArrowCircleRightTwoToneIcon sx={{color:"green",marginTop:"1.5%"}}/>
-              <TextField 
+              <TextField
+                id="outlined-basic"
+                label="rule1"
+                style={{ width: "20%" }}
+                autoComplete="off"
+                onChange={setrule1}
+                size="small"
+              />
+              <ArrowCircleRightTwoToneIcon
+                sx={{ color: "green", marginTop: "1.5%" }}
+              />
+              <TextField
                 id="outlined-basic"
                 onChange={setrule1_r}
-                size="small" autoComplete='off'
-
+                size="small"
+                autoComplete="off"
               />
             </div>
             <div style={ruleStyle}>
-              <TextField id="outlined-basic" label="rule2" style={{width:'20%'}} autoComplete='off'
- onChange={setrule2} size="small" /> 
-               <ArrowCircleRightTwoToneIcon sx={{color:"green",marginTop:"1.5%"}}/>
+              <TextField
+                id="outlined-basic"
+                label="rule2"
+                style={{ width: "20%" }}
+                autoComplete="off"
+                onChange={setrule2}
+                size="small"
+              />
+              <ArrowCircleRightTwoToneIcon
+                sx={{ color: "green", marginTop: "1.5%" }}
+              />
 
               <TextField
                 id="outlined-basic"
-                onChange={setrule2_r} autoComplete='off'
-
+                onChange={setrule2_r}
+                autoComplete="off"
                 size="small"
               />
             </div>
             <div style={ruleStyle}>
-              <TextField id="outlined-basic" label="rule3" style={{width:'20%'}} autoComplete='off'
- onChange={setrule3} size="small" />
-               <ArrowCircleRightTwoToneIcon sx={{color:"green",marginTop:"1.5%"}}/>
+              <TextField
+                id="outlined-basic"
+                label="rule3"
+                style={{ width: "20%" }}
+                autoComplete="off"
+                onChange={setrule3}
+                size="small"
+              />
+              <ArrowCircleRightTwoToneIcon
+                sx={{ color: "green", marginTop: "1.5%" }}
+              />
 
               <TextField
                 id="outlined-basic"
-                onChange={setrule3_r} autoComplete='off'
-
+                onChange={setrule3_r}
+                autoComplete="off"
                 size="small"
               />
             </div>
