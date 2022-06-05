@@ -204,7 +204,7 @@ function App() {
         <Grid item xs={9}>
           <div className="threejs">
             <Canvas>
-              <gridHelper ref={gridRef} position={[0.5,0.5,0]} rotation-x={[Math.PI/2]} args={[100,100,"teal","teal"]}></gridHelper>
+              <gridHelper ref={gridRef} position={[0.5,0.5,-0.5]} rotation-x={[Math.PI/2]} args={[100,100,"teal","teal"]}></gridHelper>
               <color attach="background" args={["#f0fcfc"]} />
               <OrbitControls makeDefault />
               <ambientLight args={["#ffffff", 0.3]} />
