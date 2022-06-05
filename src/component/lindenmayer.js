@@ -19,7 +19,6 @@ const DW = new Vector3(-2,0,-1);
 var stack = [];
 var curr ; 
 var d = 1;
-var size = 100;
 var boxes = [];
 const boxgeometry = new BoxBufferGeometry();
 const boxmat = new MeshPhysicalMaterial();
@@ -29,7 +28,7 @@ const stairmat = new MeshPhysicalMaterial();
 //stairmat.color = new Color(0x009150);
 stairmat.color = new Color(0x123456);
 stairmat.roughness=0;
-const spheregeometry = new SphereBufferGeometry(0.5,10,10);
+const spheregeometry = new SphereBufferGeometry(0.5,20,20);
 const spheremat = new MeshPhysicalMaterial();
 //spheremat.color = new Color(0x00ffff);
 spheremat.color = new Color(0x0fab1b);
@@ -66,20 +65,22 @@ function getPositionFromIndex(i,j,k){
     return position
 }
 
-function drawBox(i,j,k){
-    return (<mesh position={getPositionFromIndex(i,j,k)} geometry={boxgeometry} material={boxmat}/>)
+function drawBox(i,j,k,key){
+    return (<mesh key={key} position={getPositionFromIndex(i,j,k)} geometry={boxgeometry} material={boxmat}/>)
 }
 
-function drawBlob(i,j,k){
-    return (<mesh position={getPositionFromIndex(i,j,k)} geometry={spheregeometry} material={spheremat}/>)
+function drawBlob(i,j,k,key){
+    return (<mesh key={key} position={getPositionFromIndex(i,j,k)} geometry={spheregeometry} material={spheremat}/>)
 }
 
 const Upstair = ({i,j,k,dir})=>{
     const ref= useRef();
     const ref2=useRef();
-   // console.log(i,j,k,dir);
-    useLayoutEffect(()=>{
-        ref2.current.rotation.z=0;
+    const ref3=useRef();
+    let stairgeometry = new BoxBufferGeometry();
+
+    useEffect(()=>{
+  
         const shear = new Matrix4();
         shear.makeShear(0,0,0,1,0,0);
         const tran = new Matrix4();
@@ -87,52 +88,59 @@ const Upstair = ({i,j,k,dir})=>{
         shear.multiply(tran);
         tran.makeTranslation(0,-d,0);
         shear.multiply(tran);
+        if(dir==="N")
+        ref2.current.rotation.z = 0;
         if(dir==="S")
         ref2.current.rotation.z=Math.PI;
         if(dir==="E")
         ref2.current.rotation.z=-Math.PI/2;
         if(dir==="W"){
-            ref2.current.rotation.z=Math.PI/2;
+        ref2.current.rotation.z=Math.PI/2;
 
         }
-        ref.current.applyMatrix4(shear);
+        stairgeometry.applyMatrix4(shear);
         ref2.current.position.set(i*d,j*d,k*d);
-        }
-        )
+        ref3.current.position.set(i*d,j*d,k*d);
+       }
+       )
 
-    return (<group ref={ref2} >
-    <mesh material={stairmat}><boxBufferGeometry  ref={ref} args={[d,d,d]}/></mesh>
-    
-    <mesh material={stairmat}><boxBufferGeometry args={[d,d,d]}/></mesh>
-    </group>)
+    return (<>
+    <mesh ref={ref2} material={stairmat} geometry={stairgeometry}></mesh>
+    <mesh ref={ref3} material={stairmat}><boxBufferGeometry args={[d,d,d]}/></mesh>
+    </>)
 }
-function drawStair(i,j,k,dir){
+function drawStair(i,j,k,dir,key){
  
-    return (<Upstair i={i} j={j} k={k} dir={dir}/>)
+    return (<Upstair key={key} i={i} j={j} k={k} dir={dir}/>)
 }
 
 function step(action,b){
-    //console.log(action);
-    //console.log(JSON.stringify(stack));
 
-    if(action==="["){
-        const temp = {position:curr.position.clone(),dir:curr.dir};
-        stack.push(temp);
-        return;
-    }
+    try{
+        if(action==="["){
+            const temp = {position:curr.position.clone(),dir:curr.dir};
+            stack.push(temp);
+            return;
+        }
+    
+        if(action==="]"){
+            curr = stack.pop()
+            return;
+        }
 
-    if(action==="]"){
-        curr = stack.pop()
-        return;
+        curr.position.add(dtov[atov[curr.dir][action]]);
+
+    
+        curr.dir = atod[curr.dir][action]
+        let type="flat";
+        if(action==="/")
+            type="upstair"
+        if(action==="O")
+            type ="blob"
+        b.push({pos:curr.position.clone(),type:type,dir:curr.dir});
+    } catch(e){
+        console.log(e);
     }
-    curr.position.add(dtov[atov[curr.dir][action]]);
-    curr.dir = atod[curr.dir][action]
-    let type="flat";
-    if(action==="/")
-        type="upstair"
-    if(action==="O")
-        type ="blob"
-    b.push({pos:curr.position.clone(),type:type,dir:curr.dir});
 
 }
 
@@ -169,7 +177,6 @@ function Lsystem(preset,iteration){
 function Lsystem_custom(custom,iteration){
 
     if(custom){
-    console.log(custom);
     const rules= custom.rules;
     const axiom= custom.axiom;
 
@@ -188,7 +195,6 @@ function Lsystem_custom(custom,iteration){
     } 
      return path;
     }
-    console.log("emtpy custom");
     return "";
 
 }
@@ -206,24 +212,22 @@ const Lindenmayer = ({preset,custom_rules,iteration})=>{
         else
              path = Lsystem_custom(custom_rules,iteration);
 
-
-        //console.log(path);
+        console.log(path);
         for(let i=0;i<path.length;i++){
             step(path[i],boxes);
         }
 
 
-
     return(
         <>
         {
-        boxes.map((b,i)=>{
+        boxes.map((b,key)=>{
             if(b.type==="flat") 
-            {return drawBox(b.pos.x,b.pos.y,b.pos.z);}
+            {return drawBox(b.pos.x,b.pos.y,b.pos.z,key);}
             else if(b.type==="upstair")
-            {return drawStair(b.pos.x,b.pos.y,b.pos.z,b.dir);}
+            {return drawStair(b.pos.x,b.pos.y,b.pos.z,b.dir,key);}
             else 
-            {return drawBlob(b.pos.x,b.pos.y,b.pos.z);}}
+            {return drawBlob(b.pos.x,b.pos.y,b.pos.z,key);}}
         )
         }
         </>

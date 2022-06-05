@@ -1,5 +1,5 @@
-import React, { useRef, useState } from "react";
-import { Canvas } from "@react-three/fiber";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { Canvas, useFrame } from "@react-three/fiber";
 import "./App.css";
 import { OrbitControls, Environment } from "@react-three/drei";
 import Lindenmayer from "./component/lindenmayer";
@@ -7,6 +7,7 @@ import RowRadioButtonsGroup from "./component/selector";
 import { TextField, Button, Grid } from "@mui/material";
 import DiscreteSliderMarks from "./component/iterationslider";
 import ArrowCircleRightTwoToneIcon from "@mui/icons-material/ArrowCircleRightTwoTone";
+import { GridHelper, Vector3 } from "three";
 
 var axiom = "";
 var rule1 = "";
@@ -18,14 +19,20 @@ var rule2_r = "";
 var rule3 = "";
 var rule3_r = "";
 
+const gridTemplate = new GridHelper(100,100,"teal","teal");
+gridTemplate.rotation.x=Math.PI/2;
+gridTemplate.position.set(0.5,0.5,0);
+
 function App() {
-  const [preset, setPreset] = useState("c");
+  const [preset, setPreset] = useState("k");
   const [rules, setRules] = useState();
   const [iteration, setIteration] = useState(1);
+  const gridRef = useRef();
 
   function handleSubmit(e) {
     e.preventDefault();
     let s = { rules: "", axiom: "" };
+    
     if (rule3.length === 0 && rule2.length === 0) {
       s.rules = JSON.parse(`{"${rule1}":"${rule1_r}"}`);
     } else if (rule3.length === 0) {
@@ -41,7 +48,7 @@ function App() {
 
   function handleSubmit_2() {
     let s = { rules: "", axiom: "" };
-    if (rule1.lenght === 0 && rule2.length === 0 && rule3.lenght === 0) {
+    if (rule1.length === 0 && rule2.length === 0 && rule3.length === 0) {
       s = {};
     } else if (rule3.length === 0 && rule2.length === 0) {
       s.rules = JSON.parse(`{"${rule1}":"${rule1_r}"}`);
@@ -110,7 +117,6 @@ function App() {
               onChange={setaxiom}
               size="small"
             />
-            <div></div>
             <div style={ruleStyle}>
               <TextField
                 id="outlined-basic"
@@ -180,6 +186,7 @@ function App() {
         <Grid item xs={9}>
           <div className="threejs">
             <Canvas>
+              <gridHelper ref={gridRef} position={[0.5,0.5,0]} rotation-x={[Math.PI/2]} args={[100,100,"teal","teal"]}></gridHelper>
               <color attach="background" args={["#f0fcfc"]} />
               <OrbitControls makeDefault />
               <ambientLight args={["#ffffff", 0.3]} />
