@@ -16,11 +16,13 @@ const DN = new Vector3(0,2,-1);
 const DS = new Vector3(0,-2,-1);
 const DE = new Vector3(2,0,-1);
 const DW = new Vector3(-2,0,-1);
+const Z = new Vector3(0,0,0);
 var stack = [];
 var curr ; 
 var d = 1;
 var boxes = [];
-const boxgeometry = new BoxBufferGeometry();
+//const boxgeometry = new BoxBufferGeometry();
+const boxgeometry = new BoxBufferGeometry(0.9,0.9,0.9);
 const boxmat = new MeshPhysicalMaterial();
 boxmat.color = new Color(0xff0000);
 boxmat.roughness= 0;
@@ -34,29 +36,29 @@ const spheremat = new MeshPhysicalMaterial();
 spheremat.color = new Color(0x0fab1b);
 spheremat.roughness = 0;
 
-const Koch_curve ={rules:{"F":"F+F-F-F+F"},axiom:"F"}
-const Dragon_curve={rules:{"F":"F+G","G":"F-G"},axiom:"F"}
-const chinese_temple={rules:{"F":"FF","G":"F[+G]-G"},axiom:"G"}
-const antenna = {rules:{"F":"F/F","G":"F[+G]-G"},axiom:"G"}
+const Koch_curve ={rules:{"F":"FLFRFRFLF"},axiom:"F"}
+const Dragon_curve={rules:{"F":"FLG","G":"FRG"},axiom:"F"}
+const chinese_temple={rules:{"F":"FF","G":"F[LG]RG"},axiom:"G"}
+const antenna = {rules:{"F":"F/F","G":"F[LG]RG"},axiom:"G"}
 const rules_set = {"k":Koch_curve,"c":chinese_temple,"d":Dragon_curve,"a":antenna}
 
 const atod = {
-    "N":{"F":"N","+":"W","-":"E","B":"S","/":"N","G":"N","\\":"N","O":"N","U":"N","D":"N"},
-    "E":{"F":"E","+":"N","-":"S","B":"W","/":"E","G":"E","\\":"E","O":"E","U":"E","D":"E"},
-    "W":{"F":"W","+":"S","-":"N","B":"E","/":"W","G":"W","\\":"W","O":"W","U":"W","D":"W"},
-    "S":{"F":"S","+":"E","-":"W","B":"N","/":"S","G":"S","\\":"S","O":"S","U":"S","D":"S"},
+    "N":{"F":"N","L":"W","R":"E","B":"S","/":"N","G":"N","\\":"N","O":"N","U":"N","D":"N","+":"W","-":"E"},
+    "E":{"F":"E","L":"N","R":"S","B":"W","/":"E","G":"E","\\":"E","O":"E","U":"E","D":"E","+":"N","-":"S"},
+    "W":{"F":"W","L":"S","R":"N","B":"E","/":"W","G":"W","\\":"W","O":"W","U":"W","D":"W","+":"S","-":"N"},
+    "S":{"F":"S","L":"E","R":"W","B":"N","/":"S","G":"S","\\":"S","O":"S","U":"S","D":"S","+":"E","-":"W"},
 }
 
 const atov = {
-    "N":{"F":"N","+":"W","-":"E","B":"S","/":"UN","G":"N","\\":"DN","O":"N","U":"U","D":"D"},
-    "E":{"F":"E","+":"N","-":"S","B":"W","/":"UE","G":"E","\\":"DE","O":"E","U":"U","D":"D"},
-    "W":{"F":"W","+":"S","-":"N","B":"E","/":"UW","G":"W","\\":"DW","O":"W","U":"U","D":"D"},
-    "S":{"F":"S","+":"E","-":"W","B":"N","/":"US","G":"S","\\":"DS","O":"S","U":"U","D":"D"}
+    "N":{"F":"N","L":"W","R":"E","B":"S","/":"UN","G":"N","\\":"DN","O":"N","U":"U","D":"D","+":"Z","-":"Z"},
+    "E":{"F":"E","L":"N","R":"S","B":"W","/":"UE","G":"E","\\":"DE","O":"E","U":"U","D":"D","+":"Z","-":"Z"},
+    "W":{"F":"W","L":"S","R":"N","B":"E","/":"UW","G":"W","\\":"DW","O":"W","U":"U","D":"D","+":"Z","-":"Z"},
+    "S":{"F":"S","L":"E","R":"W","B":"N","/":"US","G":"S","\\":"DS","O":"S","U":"U","D":"D","+":"Z","-":"Z"}
 }
 
 const dtov = {
     "N": N, "E":E, "W":W, "S":S, "UN":UN,"UE":UE,"UW":UW,"US":US, "U":U,
-    "DN":DN,"DE":DE,"DW":DW,"DS":DS, "D":D
+    "DN":DN,"DE":DE,"DW":DW,"DS":DS, "D":D, "Z":Z
 }
 
 function getPositionFromIndex(i,j,k){
@@ -137,6 +139,8 @@ function step(action,b){
             type="upstair"
         if(action==="O")
             type ="blob"
+        if(action==="+" || action==="-")
+            type = "zero"
         b.push({pos:curr.position.clone(),type:type,dir:curr.dir});
     } catch(e){
         console.log(e);
@@ -226,7 +230,7 @@ const Lindenmayer = ({preset,custom_rules,iteration})=>{
             {return drawBox(b.pos.x,b.pos.y,b.pos.z,key);}
             else if(b.type==="upstair")
             {return drawStair(b.pos.x,b.pos.y,b.pos.z,b.dir,key);}
-            else 
+            else if(b.type==="blob")
             {return drawBlob(b.pos.x,b.pos.y,b.pos.z,key);}}
         )
         }
