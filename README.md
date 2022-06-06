@@ -7,6 +7,8 @@ git clone https://github.com/taroandmulan/voxel-based-L-system-react-three-fiber
 
 cd voxel-based-L-system-react-three-fiber-
 
+npm install
+
 npm start
 
 
