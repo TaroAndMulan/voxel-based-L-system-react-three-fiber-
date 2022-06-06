@@ -20,6 +20,10 @@ const RowRadioButtonsGroup = ({onChange,preset})=>{
             <FormControlLabel value="c" control={<Radio />} label="Chinese temple" />
             <FormControlLabel value="a" control={<Radio />} label="Antenna" />
             <FormControlLabel value="d" control={<Radio />} label="Dragon" />
+            <FormControlLabel value="box" control={<Radio />} label="box" />
+            <FormControlLabel value="net2" control={<Radio />} label="net2" />
+            <FormControlLabel value="net3" control={<Radio />} label="net3" />
+
             <FormControlLabel value="custom" control={<Radio />} label="CUSTOM" />
 
           </RadioGroup>

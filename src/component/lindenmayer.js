@@ -40,7 +40,10 @@ const Koch_curve ={rules:{"F":"FLFRFRFLF"},axiom:"F"}
 const Dragon_curve={rules:{"F":"FLG","G":"FRG"},axiom:"F"}
 const chinese_temple={rules:{"F":"FF","G":"F[LG]RG"},axiom:"G"}
 const antenna = {rules:{"F":"F/F","G":"F[LG]RG"},axiom:"G"}
-const rules_set = {"k":Koch_curve,"c":chinese_temple,"d":Dragon_curve,"a":antenna}
+const net2 = {rules:{"X":"XF-F+F-XF+F+XF-F+F-X"},axiom:"F+XF+F+XF"}
+const box = {rules:{"F":"FF+F+F+F+FF"},axiom:"F+F+F+F"}
+const net3 = {rules:{"X":"[-FFX]+FFX"},axiom:"FX"}
+const rules_set = {"k":Koch_curve,"c":chinese_temple,"d":Dragon_curve,"a":antenna,"net2":net2,"box":box, "net3":net3}
 
 const atod = {
     "N":{"F":"N","L":"W","R":"E","B":"S","/":"N","G":"N","\\":"N","O":"N","U":"N","D":"N","+":"W","-":"E"},
