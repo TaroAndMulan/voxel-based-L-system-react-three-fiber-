@@ -41,6 +41,7 @@ B = back
 custom rules
 
 axiom = F
+
 rule1 = F-> FF[UUULR]
 
 This will generate a wall
