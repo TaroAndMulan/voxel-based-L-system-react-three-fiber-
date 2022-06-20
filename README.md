@@ -3,6 +3,8 @@
 ![demo](https://github.com/taroandmulan/voxel-based-L-system-react-three-fiber-/blob/master/src/img/custom.png)
 
 https://frozen-ravine-65087.herokuapp.com/
+WARNING : Don't set "ITERATION" above 5 unless you are confident in your GPU power
+
 
 ### `local installation`
 
@@ -20,7 +22,6 @@ Type rule
 
 click generate
 
-WARNING : try not to increase "ITERATION" above 5 unless you are confident in your GPU power
 
 ## SUPPORT OPERATION
 
