@@ -1,5 +1,6 @@
 ## DEMO
-![alt text](http://url/to/img.png)
+![demo](https://github.com/taroandmulan/voxel-based-L-system-react-three-fiber-/blob/master/src/img/demo.png)
+![demo](https://github.com/taroandmulan/voxel-based-L-system-react-three-fiber-/blob/master/src/img/custom.png)
 
 https://frozen-ravine-65087.herokuapp.com/
 
