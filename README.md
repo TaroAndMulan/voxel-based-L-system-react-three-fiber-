@@ -1,4 +1,6 @@
 ## DEMO
+![alt text](http://url/to/img.png)
+
 https://frozen-ravine-65087.herokuapp.com/
 
 ### `local installation`
@@ -13,11 +15,11 @@ npm start
 
 ## CUSTOM RULE
 
-click "CUSTOM"
-
 Type rule
 
 click generate
+
+WARNING : try not to increase "ITERATION" above 5 unless you are confident in your GPU power
 
 ## SUPPORT OPERATION
 
@@ -40,9 +42,9 @@ B = back
 
 custom rules
 
-axiom = F
+axiom     F
 
-rule1 = F-> FF[UUULR]
+rule1     F- > FF[UUULR]
 
 This will generate a wall
 

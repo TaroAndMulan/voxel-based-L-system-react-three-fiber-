@@ -31,6 +31,7 @@ function App() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    setPreset("custom");
     let s = { rules: "", axiom: "" };
     
     if (rule3.length === 0 && rule2.length === 0) {
@@ -195,7 +196,7 @@ function App() {
             </div>
           </form>
           <div>
-          <textarea style={{marginTop:"50px",borderStyle:"solid",padding:"15px",backgroundColor:"FloralWhite", fontSize:"20px"}}/>
+          <textarea style={{marginTop:"50px",borderStyle:"solid",padding:"15px",backgroundColor:"FloralWhite", fontSize:"20px"}}> </textarea>
           </div>
 
 
