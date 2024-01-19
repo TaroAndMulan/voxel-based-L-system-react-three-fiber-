@@ -196,7 +196,22 @@ function App() {
             </div>
           </form>
           <div>
-          <textarea style={{marginTop:"50px",borderStyle:"solid",padding:"15px",backgroundColor:"FloralWhite", fontSize:"20px"}}> </textarea>
+          <div style={{marginTop:"50px",borderStyle:"solid",padding:"15px",backgroundColor:"FloralWhite", fontSize:"20px"}}>
+            F , G = forward <br></br>
+
+O = sphere <br></br>
+
+/ = stair up <br></br>
+
+U,D = up, down<br></br>
+
+L,R,+,- = left, right, rotate_left, rotate_right <br></br>
+
+B = back <br></br>
+
+[,] = save,resume 
+
+ </div>
           </div>
 
 
@@ -210,7 +225,7 @@ function App() {
               <OrbitControls makeDefault />
               <ambientLight args={["#ffffff", 0.3]} />
               <pointLight args={["yellow", 1]} position={[0, 2, 8]} />
-              <Environment preset="warehouse" />
+              <Environment files="./empty_warehouse_01_4k.hdr"/>
               <Lindenmayer
                 preset={preset}
                 custom_rules={rules}
