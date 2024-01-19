@@ -1,6 +1,6 @@
-# Lsystem in Voxel
+# Lsystem simulator in Voxel format
 
-In computer science, L-systems are used as a formalism for generating complex structures through a set of rewriting rules. Initially introduced for modeling plant growth, L-systems have found applications in computer graphics, fractal generation, and procedural content generation. They provide a flexible and recursive approach to describing patterns, making them valuable in various computational and artistic domains.
+In computer science, An L-system or Lindenmayer system are used as a formalism for generating complex structures through a set of rewriting rules. Initially introduced for modeling plant growth, L-systems have found applications in computer graphics, fractal generation, and procedural content generation. They provide a flexible and recursive approach to describing patterns, making them valuable in various computational and artistic domains.
 
 
 In this project, I created a voxel-based L-system simulator designed for teachers who want to introduce the concept of L-systems to students through 3D graphics. Students can input a list of rules and see the result in minecraft-liked world that can be navigate like in a video game. (Frontend-React/Graphic-ReactThreeFiber)
