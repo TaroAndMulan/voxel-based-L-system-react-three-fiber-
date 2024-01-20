@@ -13,8 +13,7 @@ https://voxel-based-l-system-react-three-fiber.vercel.app/
 
 ![demo](https://github.com/taroandmulan/voxel-based-L-system-react-three-fiber-/blob/master/src/img/demo.png)
 ![demo](https://github.com/taroandmulan/voxel-based-L-system-react-three-fiber-/blob/master/src/img/custom.png)
-![alt text][logo2]
-[logo2]: https://github.com/TaroAndMulan/voxel-based-L-system-react-three-fiber-/blob/master/public/3d.gif "3dworld"
+![3dworld](https://github.com/TaroAndMulan/voxel-based-L-system-react-three-fiber-/blob/master/public/3d.gif)
 
 ### `local installation`
 
