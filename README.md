@@ -25,20 +25,6 @@ npm install
 
 npm start
 
-## PRESET RULE
-
-Choose rule 
-
-adjust the slider 
-
-## CUSTOM RULE
-
-Choose "custom" 
-
-adjust the slider 
-
-click generate
-
 
 ## SUPPORT OPERATION
 
