@@ -225,7 +225,7 @@ B = back <br></br>
               <OrbitControls makeDefault />
               <ambientLight args={["#ffffff", 0.3]} />
               <pointLight args={["yellow", 1]} position={[0, 2, 8]} />
-              <Environment files="./empty_warehouse_01_4k.hdr"/>
+              <Environment files="./empty_warehouse_01_1k.hdr"/>
               <Lindenmayer
                 preset={preset}
                 custom_rules={rules}
