@@ -11,6 +11,8 @@ In this project, I created a voxel-based L-system simulator designed for teacher
 
 https://voxel-based-l-system-react-three-fiber.vercel.app/
 
+_left click - Rotate , middle mouse - Zoom, right click - pan_
+
 If the link above doesn't work (i.e. can load but white screen), then it mean that my cache file on vercel server has gone inactive. It will work again only when someone notify me and I redeployed it. Check local installation section below to see how to build it locally yourself.
 
 ![demo](https://github.com/taroandmulan/voxel-based-L-system-react-three-fiber-/blob/master/src/img/demo.png)
